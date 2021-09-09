@@ -98,6 +98,7 @@ class Board:
                     else:
                         ans+=list2
                         print("siema")
+            ans+=list2
             #return ans
 
 
