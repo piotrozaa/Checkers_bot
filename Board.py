@@ -90,7 +90,8 @@ class Board:
                         if self.isEmpty(currentPosition.add(2 * xi, 2 * yi)):
                             new_list=list2.copy()
                             new_list+=([currentPosition, currentPosition.add(2 * xi, 2 * yi)])
-                            list2.append(FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
+                            list2.append(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)).FurtherCaptures(currentPosition.add(2 * xi, 2 * yi),new_list))
+                            #list2.append(self.FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
         else:
             for xi in [-1, 1]:
                 for yi in [-1, 1]:
