@@ -87,9 +87,9 @@ class Board:
             list2.append(where)
             for xi in [-1, 1]:
                 for yi in [-1, 1]:
-                    if self.isBlack(where.add(xi, yi)):
-                        if self.isEmpty(where.add(2 * xi, 2 * yi)):
-                            self.FurtherCaptures(self.make_single_move(where.where.add(2*xi, 2 * yi)), where, where.add(2*xi, 2 * yi), white.king,list2.copy(), ans)
+                    if self.isBlack(where.add(yi, xi)):
+                        if self.isEmpty(where.add(2 * yi, 2 * xi)):
+                            self.FurtherCaptures(self.make_single_move(where.where.add(2*yi, 2 * xi)).copy(), where, where.add(2*yi, 2 * xi), white.king,list2.copy(), ans)
                             #list2.append(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)).FurtherCaptures(currentPosition.add(2 * xi, 2 * yi),currentPosition,new_list,king))
                             #list2.append(self.FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
                         else:
@@ -97,7 +97,7 @@ class Board:
                     else:
                         ans+=list2
             #return ans
-            ans+=list2
+
 
         else:
             for xi in [-1, 1]:
@@ -120,9 +120,9 @@ class Board:
             for white in self.whites:
                 if not white.king:
                     for i in [-1, 1]:
-                        if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2*i, 2)):
+                        if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2, 2*i)):
                             list2.append(white.position())
-                            self.FurtherCaptures(self.make_single_move(white.position(),white.position().add(2*i, 2)).copy(),white.position(),white.position().add(2,2*i),white.king,list2.copy(),ans)
+                            self.FurtherCaptures(self.make_single_move(white.position(),white.position().add(2, 2*i)).copy(),white.position(),white.position().add(2,2*i),white.king,list2.copy(),ans)
                             """currentPosition=white.position().add(2,2*1)
                             #list2.append([white.position(),currentPosition])
                             list+=self.FurtherCaptures(white.position(),currentPosition,list2,white.king)"""
