@@ -119,9 +119,9 @@ class Board:
             for white in self.whites:
                 if not white.king:
                     for i in [-1, 1]:
-                        if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2, 2 * i)):
+                        if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2*i, 2)):
                             list2.append(white.position())
-                            self.FurtherCaptures(self.make_single_move(white.position(),white.position().add(2, 2 * i)).copy(),white.position(),white.position().add(2,2*i),white.king,list2.copy(),ans)
+                            self.FurtherCaptures(self.make_single_move(white.position(),white.position().add(2*i, 2)).copy(),white.position(),white.position().add(2,2*i),white.king,list2.copy(),ans)
                             """currentPosition=white.position().add(2,2*1)
                             #list2.append([white.position(),currentPosition])
                             list+=self.FurtherCaptures(white.position(),currentPosition,list2,white.king)"""
