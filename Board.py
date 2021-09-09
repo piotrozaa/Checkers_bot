@@ -122,7 +122,7 @@ class Board:
                     for i in [-1, 1]:
                         if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2, 2*i)):
                             list2.append(white.position())
-                            self.FurtherCaptures(self.make_move([white.position(),white.position().add(2, 2*i)].copy(),white.position(),white.position().add(2,2*i),white.king,list2.copy(),ans)
+                            self.FurtherCaptures(self.make_move([white.position(),white.position().add(2, 2*i)].copy()),white.position(),white.position().add(2,2*i),white.king,list2.copy(),ans)
                             """currentPosition=white.position().add(2,2*1)
                             #list2.append([white.position(),currentPosition])
                             list+=self.FurtherCaptures(white.position(),currentPosition,list2,white.king)"""
@@ -137,7 +137,6 @@ class Board:
                                 where = where.add(xi, yi)
                             if self.isBlack(where) and self.isEmpty(where.add(xi,yi)):
                                 list+=(FurtherCapture(self, where.add(xi,yi), list2, white.king))"""
-
 
 
         else:
