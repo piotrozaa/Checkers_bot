@@ -83,15 +83,21 @@ class Board:
         return True
 
     def FurtherCaptures(self, currentPosition, list2,king):
+        where=currentPosition.add(2*xi,2*yi)
         if not king:
             for xi in [-1, 1]:
                 for yi in [-1, 1]:
-                    if self.isBlack(currentPosition.add(xi, yi)):
-                        if self.isEmpty(currentPosition.add(2 * xi, 2 * yi)):
+                    if self.isBlack(where.add(xi, yi)):
+                        if self.isEmpty(where.add(2 * xi, 2 * yi)):
                             new_list=list2.copy()
                             new_list+=([currentPosition, currentPosition.add(2 * xi, 2 * yi)])
                             list2.append(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)).FurtherCaptures(currentPosition.add(2 * xi, 2 * yi),new_list,king))
                             #list2.append(self.FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
+                        else:
+                            list2.append[currentPosition,where]
+                    else:
+                        list2.append[currentPosition, where]
+
         else:
             for xi in [-1, 1]:
                 for yi in [-1, 1]:
@@ -113,7 +119,7 @@ class Board:
                 if not white.king:
                     for i in [-1, 1]:
                         if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2, 2 * i)):
-                            currentPosition=white.position().add(2,2*1)
+                            #currentPosition=white.position().add(2,2*1)
                             #list2.append([white.position(),currentPosition])
                             list+=self.FurtherCaptures(currentPosition,list2,white.king)
 
