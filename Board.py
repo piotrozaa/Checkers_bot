@@ -120,7 +120,7 @@ class Board:
                         if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2, 2 * i)):
                             currentPosition=white.position().add(2,2*1)
                             #list2.append([white.position(),currentPosition])
-                            list+=self.FurtherCaptures(white.position(),currentPositionlist2,white.king)
+                            list+=self.FurtherCaptures(white.position(),currentPosition,list2,white.king)
 
 
                 """else:
