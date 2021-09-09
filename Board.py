@@ -135,7 +135,7 @@ class Board:
                 a.position()
                 for i in [-1, 1]:
                     if (self.isEmpty(a.position().add(1, i))):
-                        list.append(a.position(), a.position.add(1, i))
+                        list.append(a.position(), a.position().add(1, i))
         return list
 
     # Check if it is possible for the white player to capture an opponent's piece
