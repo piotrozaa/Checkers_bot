@@ -83,13 +83,15 @@ class Board:
         return True
 
     def FurtherCaptures(self, currentPosition, where, list2,king,ans):
+        print("witam")
         if not king:
             list2.append(where)
+            print(where)
             for xi in [-1, 1]:
                 for yi in [-1, 1]:
                     if self.isBlack(where.add(yi, xi)):
                         if self.isEmpty(where.add(2 * yi, 2 * xi)):
-                            self.make_move([where.where.add(2*yi, 2 * xi)]).copy().FurtherCaptures( where, where.add(2*yi, 2 * xi), white.king,list2.copy(), ans)
+                            self.make_move([where,where.add(2*yi, 2 * xi)]).copy().FurtherCaptures( where, where.add(2*yi, 2 * xi), white.king,list2.copy(), ans)
                             #list2.append(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)).FurtherCaptures(currentPosition.add(2 * xi, 2 * yi),currentPosition,new_list,king))
                             #list2.append(self.FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
                         else:
@@ -111,12 +113,12 @@ class Board:
                         if self.isBlack(currentPosition.add(xi,yi)) and self.isEmpty(currentPosition.add(2*yi, 2*xi)):
                             new_list = list2.copy()
                             new_list.append([currentPosition, currentPosition.add(2 * xi, 2 * yi)])
-                            list2.append(FurtherCaptures(self.make_move([currentPosition.add(2 * xi, 2 * yi)]).copy(),currentPosition.add(2 * xi, 2 * yi), new_list,king))
+                            #list2.append(self.make_move([currentPosition.add(2 * xi, 2 * yi)]).copy()FurtherCaptures(currentPosition.add(2 * xi, 2 * yi), new_list,king))
         return list2;
 
 
     def PossibleMoves(self):
-        list = []
+        list =[]
         list2=[]
         ans=[]
         if (self.capture_possible()):
@@ -125,6 +127,7 @@ class Board:
                     for i in [-1, 1]:
                         if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2, 2*i)):
                             list2.append(white.position())
+                            print(white.position())
                             self.make_move([white.position(),white.position().add(2, 2*i)]).copy().FurtherCaptures(white.position(),white.position().add(2,2*i),white.king,list2.copy(),ans)
                             """currentPosition=white.position().add(2,2*1)
                             #list2.append([white.position(),currentPosition])
@@ -148,6 +151,8 @@ class Board:
                 for i in [-1, 1]:
                     if (self.isEmpty(a.position().add(1, i))):
                         list.append([a.position(), a.position().add(1, i)])
+
+
         return ans
 
     # Check if it is possible for the white player to capture an opponent's piece
