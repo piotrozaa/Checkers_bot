@@ -100,8 +100,7 @@ class Board:
                         if self.isBlack(currentPosition.add(xi,yi)) and self.isEmpty(currentPosition.add(2*yi, 2*xi)):
                             new_list = list2.copy()
                             new_list+=([currentPosition, currentPosition.add(2 * xi, 2 * yi)])
-                            list2.append(FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),
-                                                         currentPosition.add(2 * xi, 2 * yi), new_list,king))
+                            list2.append(FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi), new_list,king))
         return list2;
 
 
