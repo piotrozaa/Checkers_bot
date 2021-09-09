@@ -97,6 +97,7 @@ class Board:
                     else:
                         ans+=list2
             #return ans
+            ans+=list2
 
         else:
             for xi in [-1, 1]:
