@@ -89,7 +89,7 @@ class Board:
                 for yi in [-1, 1]:
                     if self.isBlack(where.add(xi, yi)):
                         if self.isEmpty(where.add(2 * xi, 2 * yi)):
-                            self.FurtherCaptures(self, white.position(), white.position().add(2, 2 * i), white.king,list2.copy(), ans)
+                            self.FurtherCaptures(self.make_single_move(where.where.add(2*xi, 2 * yi)), where, where.add(2*xi, 2 * yi), white.king,list2.copy(), ans)
                             #list2.append(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)).FurtherCaptures(currentPosition.add(2 * xi, 2 * yi),currentPosition,new_list,king))
                             #list2.append(self.FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
                         else:
