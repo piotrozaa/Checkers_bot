@@ -93,9 +93,9 @@ class Board:
                             list2.append(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)).FurtherCaptures(currentPosition.add(2 * xi, 2 * yi),currentPosition,new_list,king))
                             #list2.append(self.FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
                         else:
-                            list2.append[currentPosition,where]
+                            list2.append([currentPosition,where])
                     else:
-                        list2.append[currentPosition, where]
+                        list2.append([currentPosition, where])
 
         else:
             for xi in [-1, 1]:
