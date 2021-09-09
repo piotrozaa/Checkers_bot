@@ -81,8 +81,64 @@ class Board:
         if self.normal_move_possible():
             return False
         return True
-    
-    
+
+    def FurtherCaptures(self, currentPosition, list2,king):
+        if not king:
+            for xi in [-1, 1]:
+                for yi in [-1, 1]:
+                    if self.isBlack(currentPosition.add(xi, yi)):
+                        if self.isEmpty(currentPosition.add(2 * xi, 2 * yi)):
+                            new_list=list2.copy()
+                            new_list.append(currentPosition, currentPosition.add(2 * xi, 2 * yi))
+                            list2.append(FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
+        else:
+            for xi in [-1, 1]:
+                for yi in [-1, 1]:
+                    # Go in that direction, until an occuppied field is found or we reach the end of the board
+                    while (self.isEmpty(currentPosition)):
+                        currentPosition = currentPosition.add(yi, xi)
+                        if self.isBlack(currentPosition.add(xi,yi)) and self.isEmpty(currentPosition.add(2*yi, 2*xi)):
+                            new_list = list2.copy()
+                            new_list.append(currentPosition, currentPosition.add(2 * xi, 2 * yi))
+                            list2.append(FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),
+                                                         currentPosition.add(2 * xi, 2 * yi), new_list,king))
+        return list2;
+
+
+    def PossibleMoves(self):
+        list = []
+        list2=[]
+        c=true
+        if (self.capture_possible()):
+            for white in self.whites:
+                if not white.king:
+                    for i in [-1, 1]:
+                        if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2, 2 * i)):
+                            currentPosition=white.position().add(2*2*1)
+                            #list2.append(white.position(),currentPosition)
+                            list.append(FurtherCapture(self,currentPosition,list2,white.king))
+
+
+                else:
+                    for xi in [-1, 1]:
+                        for yi in [-1, 1]:
+                            where = currentPosition.add(yi, xi)
+                            # Go in that direction, until an occuppied field is found or we reach the end of the board
+                            while (self.isEmpty(where)):
+                                where = where.add(xi, yi)
+                            if self.isBlack(where) and self.isEmpty(where.add(xi,yi)):
+                                list.append(FurtherCapture(self, where.add(xi,yi), list2, white.king))
+
+
+
+        else:
+            for a in self.whites:
+                a.position()
+                for i in [-1, 1]:
+                    if (self.isEmpty(a.position.add(1, i))):
+                        list.append(a.position(), a.position.add(1, i))
+        return list
+
     # Check if it is possible for the white player to capture an opponent's piece
     def capture_possible(self):
         # Iterate over all the white pieces
