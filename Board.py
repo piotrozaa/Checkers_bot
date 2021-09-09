@@ -134,7 +134,7 @@ class Board:
             for a in self.whites:
                 a.position()
                 for i in [-1, 1]:
-                    if (self.isEmpty(a.position.add(1, i))):
+                    if (self.isEmpty(a.position().add(1, i))):
                         list.append(a.position(), a.position.add(1, i))
         return list
 
