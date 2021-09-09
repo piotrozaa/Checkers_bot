@@ -75,6 +75,6 @@ def Min_max(state, depth,max_depth):
     return value
 
 
-class MinMaxBot(depth,board):
+class MinMaxBot(depth):
     def make_move(self,board):
-        return Min_max(board,0,depth)
+        return Min_max(0,depth)

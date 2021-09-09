@@ -108,7 +108,6 @@ class Board:
     def PossibleMoves(self):
         list = []
         list2=[]
-        c=true
         if (self.capture_possible()):
             for white in self.whites:
                 if not white.king:
