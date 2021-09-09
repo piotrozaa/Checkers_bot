@@ -94,8 +94,10 @@ class Board:
                             #list2.append(self.FurtherCaptures(self.make_single_move(currentPosition.add(2 * xi, 2 * yi)),currentPosition.add(2 * xi, 2 * yi),new_list))
                         else:
                             ans+=list2
+                            print("siema")
                     else:
                         ans+=list2
+                        print("siema")
             #return ans
 
 
