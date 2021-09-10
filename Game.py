@@ -5,9 +5,6 @@ from Position import Position
 from Board import Board
 from Engine import Engine
 
-# some changes
-# some changes
-
 
 # Your bot should be a class, which contains a function called make_move(self, board). It should return a move which a bot would make for a given state of board - board.
 # It should return a list of Positions, representing the piece's move. Its first element should be a piece's starting Position and the next values should encode the piece's path:
@@ -65,9 +62,12 @@ class Game:
             IPython.display.clear_output()
             self.engine.board.show(is_white)
 
-        if (self.engine.board.white_lost()):
-            print("WHITE WINS" if is_white else "BLACK WINS")
-            self.result['winner'] = 'white' if is_white else 'black'
+        if (self.engine.game_finished):
+            if not self.engine.draw:
+                print("WHITE WINS" if is_white else "BLACK WINS")
+                self.result['winner'] = 'white' if is_white else 'black'
+            else:
+                print("DRAW")
             self.engine.board.show()
             self.continue_game = False
     
@@ -98,9 +98,12 @@ class Game:
             IPython.display.clear_output()
             self.engine.board.show(is_white)
 
-        if (self.engine.board.white_lost()):
-            print("WHITE WINS" if is_white else "BLACK WINS")
-            self.result['winner'] = 'white' if is_white else 'black'
+        if (self.engine.game_finished):
+            if not self.engine.draw:
+                print("WHITE WINS" if is_white else "BLACK WINS")
+                self.result['winner'] = 'white' if is_white else 'black'
+            else:
+                print("DRAW")
             self.engine.board.show()
             self.continue_game = False
     

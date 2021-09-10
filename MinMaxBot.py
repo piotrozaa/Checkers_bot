@@ -9,14 +9,14 @@ from Board import Board
 from Game import Game
 
 
-def Evaluation(Board):
-    numberOfWhites = len(Board.whites)
-    numberOfBlacks = len(Board.blacks)
-    for piece in Board.whites:
+def Evaluation(board):
+    numberOfWhites = len(board.whites)
+    numberOfBlacks = len(board.blacks)
+    for piece in board.whites:
         if (piece.king):
             numberOfWhites += 4
 
-    for piece in Board.blacks:
+    for piece in board.blacks:
         if (piece.king):
             numberOfBlacks += 4
 
@@ -67,14 +67,19 @@ def Min_max(state, depth,max_depth):
     if(depth==0):
         return state
     if depth == max_depth:
-        return Evaluation(Board)
+        return Evaluation(state)
     value = 0
-    list=Board.PossibleMoves()
+    list=state.PossibleMoves()
     for move in list:
         value = max(value, 1 - Min_max(state, depth + 1, max_depth))
     return value
 
 
-class MinMaxBot(depth):
+class MinMaxBot():
     def make_move(self,board):
-        return Min_max(0,depth)
+        value=0
+        for move in board.PossibleMoves():
+            if Min_max(board.make_move(move),1,3)>value:
+                return_move=move
+        return return_move
+

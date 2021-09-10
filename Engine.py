@@ -13,6 +13,7 @@ class Engine:
         self.game_finished = False
         self.boring_moves = 0
         self.limit_boring_moves = 25
+        self.draw = False
     
     # Returns a safe copy of a board
     def get_board(self):
@@ -24,8 +25,7 @@ class Engine:
         if len(moves) == 2:
             if self.board.world[moves[0].y][moves[0].x] != None:
                 if self.board.world[moves[0].y][moves[0].x].king:
-                    if moves[1].y == moves[0].y:
-                        boring_move = True
+                    boring_move = True
           
         if boring_move:
             self.boring_moves += 1
@@ -34,8 +34,10 @@ class Engine:
             
         if self.boring_moves >= self.limit_boring_moves:
             winner = "draw"
+            print("draw")
             self.game_finished = True
-            print("A game finished with a draw")
+            self.draw = True
+            raise 
         
         
         new_board = self.board
