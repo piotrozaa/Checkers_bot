@@ -92,7 +92,7 @@ class Board:
                 for yi in [-1, 1]:
                     if self.isBlack(where.add(yi, xi)):
                         if self.isEmpty(where.add(2 * yi, 2 * xi)):
-                            self.make_move([where,where.add(2*yi, 2 * xi)]).revert().copy().FurtherCaptures( where, where.add(2*yi, 2 * xi), list.copy(),king, ans)
+                            self.make_single_move(where,where.add(2*yi, 2 * xi),True,False).FurtherCaptures( where, where.add(2*yi, 2 * xi), list.copy(),king, ans)
                             isLast=False
             if(isLast):
                 list.append(where)
@@ -100,23 +100,22 @@ class Board:
 
 
         else:
-            print(where.x,where.y)
+            #print(where.x,where.y)
             for xi in [-1, 1]:
                 for yi in [-1, 1]:
                     newPos=where.add(yi,xi)
                     while (self.isEmpty(newPos)):
                         newPos = newPos.add(yi, xi)
-
                     if self.isBlack(newPos) and self.isEmpty(newPos.add(yi, xi)):
-                        self.make_move([where, newPos.add(yi, xi)]).revert().copy().FurtherCaptures(where, newPos.add(yi,xi), list.copy(), king, ans)
-                        print("siema", newPos.x, newPos.y)
+                        self.make_single_move(where, newPos.add(yi, xi),True,False).FurtherCaptures(where, newPos.add(yi,xi), list.copy(), king, ans)
+                        #print("siema", newPos.x, newPos.y)
                         isLast=False
                         goX=xi
                         goY=yi
             if isLast:
                 list.append(where)
-                print(list)
-                print(where.x,where.y)
+                #print(list)
+                #print(where.x,where.y)
                 ans.append(list)
 
 
@@ -130,7 +129,7 @@ class Board:
                         if self.isBlack(white.position().add(1, i)) and self.isEmpty(white.position().add(2, 2*i)):
                             #list2.append(white.position())
                             #print(white.king)
-                            self.make_move([white.position(),white.position().add(2, 2*i)]).revert().copy().FurtherCaptures(white.position(),white.position().add(2,2*i),list2.copy(),white.king,ans)
+                            self.make_single_move(white.position(),white.position().add(2, 2*i),True,False).copy().FurtherCaptures(white.position(),white.position().add(2,2*i),list2.copy(),white.king,ans)
                 else:
                     for xi in [-1, 1]:
                         for yi in [-1, 1]:
@@ -138,7 +137,7 @@ class Board:
                             while (self.isEmpty(where)):
                                 where = where.add(yi, xi)
                             if self.isBlack(where) and self.isEmpty(where.add(yi, xi)):
-                                self.make_move([white.position(), where.add(yi,xi)]).revert().copy().FurtherCaptures(white.position(), where.add(yi,xi), list2.copy(), white.king, ans)
+                                self.make_single_move(white.position(), where.add(yi,xi),True,False).copy().FurtherCaptures(white.position(), where.add(yi,xi), list2.copy(), white.king, ans)
 
 
 
@@ -201,11 +200,12 @@ class Board:
     def __init__(self):
         self.whites = []
         self.blacks = []
-        # Create white and black pieces on appropriate positions and add them to the board's world
+#         # Create white and black pieces on appropriate positions and add them to the board's world
         self.world = [[(self.newWhite(y, x) if y < 3 else self.newBlack(y, x))
                            if ((x + y) % 2 == 0 and (y < 3 or y > 6)) else None 
                     for x in range(10)]
                     for y in range(10)]
+          
     
     
     # Initializes an empty board (with no pieces on it)
@@ -300,7 +300,7 @@ class Board:
         if must_capture:
             if not piece.king:
                 if abs(new.y - old.y) != 2 or abs(new.x - old.x) != 2 or (first_move and new.y - old.y != 2):
-                    print(self.capture_possible(True))
+                    #print(self.capture_possible(True))
                     raise ValueError("You have to capture", self, moves_log)
                 if not self.isBlack(old.middle(new)):
                     raise ValueError("You have to capture an enemy", self, moves_log)
@@ -342,6 +342,7 @@ class Board:
         else:
             if not piece.king:
                 if new.y - old.y != 1 or abs(new.x - old.x) != 1:
+                    self.show()
                     raise ValueError("The position is inaccessible for this piece", self, moves_log)
             else:
                 if abs(new.y - old.y) != abs(new.x - old.x):

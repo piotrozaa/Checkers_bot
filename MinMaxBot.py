@@ -23,8 +23,6 @@ def Evaluation(board):
     totalPieces = numberOfBlacks + numberOfWhites
     return numberOfWhites / totalPieces
 
-max_depth=3
-
 """def PossibleMoves(Board):
     list=[]
     if (Board.capture_possible()):
@@ -59,27 +57,41 @@ max_depth=3
 
 
 
+    
+def pretty_print_moves(move):
+    to_print = "["
+    for m in move:
+        to_print += str(m.x) + ", " + str(m.y)
+    to_print += "]"
+    print(to_print)
 
 
 
 
 def Min_max(state, depth,max_depth):
-    if(depth==0):
-        return state
     if depth == max_depth:
         return Evaluation(state)
     value = 0
     list=state.PossibleMoves()
     for move in list:
-        value = max(value, 1 - Min_max(state, depth + 1, max_depth))
+        """if(depth%2==1):
+            value = max(value,Min_max(state.make_move(move).copy(), depth + 1, max_depth))
+        else:
+            value=min(value,Min_max(state.make_move(move).copy(), depth + 1, max_depth))"""
+#         if state.isBlack(Position(2, 2)) and state.isWhite(Position(3, 3)):
+#         print("in minmax: ")
+#        pretty_print_moves(move)
+
+        new_board = state.make_move(move)
+        value = max(value, 1-Min_max(new_board, depth + 1, max_depth))
     return value
 
 
 class MinMaxBot():
     def make_move(self,board):
-        value=0
+        value=-1
         for move in board.PossibleMoves():
-            if Min_max(board.make_move(move),1,3)>value:
+            if Min_max(board.make_move(move),1,4)>value:
                 return_move=move
         return return_move
 
